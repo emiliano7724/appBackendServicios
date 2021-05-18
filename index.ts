@@ -2,6 +2,7 @@ import Server from './class/server';
 import connection from './bin/connection';
 import bodyPaser from 'body-parser';
 import userRoutes from './routes/users';
+import servicioRoutes from './routes/servicios';
 import fileUpload from 'express-fileupload';
 
 
@@ -21,6 +22,7 @@ server.app.use(fileUpload());
 
 //Rutas aplicacion
 server.app.use('/users', userRoutes);
+server.app.use('/servicios', servicioRoutes);
 
 
 //Conexión dataBase MySQL
