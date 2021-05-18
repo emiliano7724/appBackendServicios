@@ -208,17 +208,17 @@ servicioRoutes.get("/getMesCalendario", verificarToken, async (req: any, res: Re
 
  
         const id_empleado = body.id_empleado;
-        const resultSemana1 = await query(   // hacemos 3 controles para saber q no esta asignada
+        const resultSemana1 = await query(   // 
             "SELECT * FROM `mes_calendario_x_empleado_semana1` where id_empleado=? and ISNULL(`deleted_at`) and `asignado`=1",[id_empleado]
         );
 
-        const resultSemana2 = await query(   // hacemos 3 controles para saber q no esta asignada
+        const resultSemana2 = await query(   // 
             "SELECT * FROM `mes_calendario_x_empleado_semana2` where id_empleado=? and ISNULL(`deleted_at`) and `asignado`=1",[id_empleado]
         );
-        const resultSemana3 = await query(   // hacemos 3 controles para saber q no esta asignada
+        const resultSemana3 = await query(   // 
             "SELECT * FROM `mes_calendario_x_empleado_semana2` where id_empleado=? and ISNULL(`deleted_at`) and `asignado`=1",[id_empleado]
         );
-        const resultSemana4 = await query(   // hacemos 3 controles para saber q no esta asignada
+        const resultSemana4 = await query(   // 
             "SELECT * FROM `mes_calendario_x_empleado_semana2` where id_empleado=? and ISNULL(`deleted_at`) and `asignado`=1",[id_empleado]
         );
         res.json({
