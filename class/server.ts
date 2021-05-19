@@ -1,11 +1,11 @@
 import express from 'express';
-
+require('dotenv').config();
 class Server {
 
     public app: express.Application;
-    public host: string = "localhost";
-    public puerto: number = 3000;
-
+    public host:string= String(process.env.SERVER_HOST);
+    public puerto: number =Number(process.env.SERVER_PORT)
+    
     constructor() {
         this.app = express();
     }

@@ -1,9 +1,8 @@
 import { Router, Response, Request } from "express";
-import { Token } from "../class/token";
+
 import { verificarToken } from "../middlewares/authentication";
 import query from "../utils/promesas";
-import bcrypt from "bcryptjs";
-
+import emailClass from '../class/email'
 const servicioRoutes = Router();
 
 
@@ -99,13 +98,18 @@ servicioRoutes.put("/asignarServicioAempleado", verificarToken, async (req: any,
         const id_usr = body.id_usr;
         const id_frecuencia_horaria = body.id_frecuencia_horaria;
         const updated_at = new Date();
-
+        let email:string="";
         const asignado = 1; // harcodeamos en true para asignar el servicio
 
-        const result = await query(   // hacemos 3 controles para saber q no esta asignada
+        const result:any = await query(   // hacemos 3 controles para saber q no esta asignada
             "UPDATE `frecuencia_horaria` SET `id_empleado` = ?, `updated_at` = ?, `id_usr` = ?, `asignado` = ?" +
             " WHERE `frecuencia_horaria`.`id_frecuencia_horaria` = ?", [id_empleado, updated_at, id_usr, asignado, id_frecuencia_horaria]
         );
+        Object.keys(result).forEach(function (key) {
+            var row = result[key];
+            email = row.email;
+        });
+
 
         res.json({
             estado: "succes",
@@ -113,6 +117,18 @@ servicioRoutes.put("/asignarServicioAempleado", verificarToken, async (req: any,
             data: result,
 
         });
+        
+
+        const emailEnvio = new emailClass()
+
+
+    const envio = await emailEnvio.enviarEmail(email, "Asignacion servicio", "Nuevo servicio asignado y creado con exito", "");
+
+    res.json({
+        estado:"success",
+        mensaje: "Servicio asignado con exito", 
+        emailResult: envio
+    })
     } catch (error) {
         res.json({ estado: "error", data: error });
     }
@@ -216,10 +232,10 @@ servicioRoutes.get("/getMesCalendario", verificarToken, async (req: any, res: Re
             "SELECT * FROM `mes_calendario_x_empleado_semana2` where id_empleado=? and ISNULL(`deleted_at`) and `asignado`=1",[id_empleado]
         );
         const resultSemana3 = await query(   // 
-            "SELECT * FROM `mes_calendario_x_empleado_semana2` where id_empleado=? and ISNULL(`deleted_at`) and `asignado`=1",[id_empleado]
+            "SELECT * FROM `mes_calendario_x_empleado_semana3` where id_empleado=? and ISNULL(`deleted_at`) and `asignado`=1",[id_empleado]
         );
         const resultSemana4 = await query(   // 
-            "SELECT * FROM `mes_calendario_x_empleado_semana2` where id_empleado=? and ISNULL(`deleted_at`) and `asignado`=1",[id_empleado]
+            "SELECT * FROM `mes_calendario_x_empleado_semana4` where id_empleado=? and ISNULL(`deleted_at`) and `asignado`=1",[id_empleado]
         );
         res.json({
             estado: "succes",
