@@ -3,18 +3,18 @@ import fs from 'fs';
 import unidid from 'uniqid';
 import { IfileUpload } from '../interfaces/file-upload';
 
-export default class FileSystem {
+export default class FileSystem{
+    
+    constructor(){}
 
-    constructor() { }
-
-    private crearCarpetaUsuario(userId: string) {
+    private crearCarpetaUsuario(userId:string){
         const pathUser = path.resolve(__dirname, '../uploads', userId);
-        const pathUserTemp = pathUser + "/temp";
+        const pathUserTemp = pathUser+"/temp";
         console.log("ruta pathUser", pathUser);
 
-        const existe: boolean = fs.existsSync(pathUser);
+        const existe:boolean = fs.existsSync(pathUser);
 
-        if (!existe) {
+        if(!existe){
             fs.mkdirSync(pathUser);
             fs.mkdirSync(pathUserTemp);
         }
@@ -22,48 +22,79 @@ export default class FileSystem {
         return pathUserTemp
     }
 
-    private generarNombreUnico(nombreOriginal: string): string {
-
+    private generarNombreUnico(nombreOriginal:string):string{
+        
         const nombreArr = nombreOriginal.split('.');  //[1,2,8]
-        const extension = nombreArr[nombreArr.length - 1];
+        const extension = nombreArr[nombreArr.length-1];
         const idUnico = unidid();
 
         return `${idUnico}.${extension}`;
 
     }
 
-    guardarImagenTemporal(userId: string, file: IfileUpload): Promise<any> {
+    guardarImagenTemporal(userId:string, file:IfileUpload):Promise<any>{
 
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve,reject)=>{
             const path = this.crearCarpetaUsuario(userId);//donde la voy a guardar
-            console.log("path", path)
-            const nombreArchivo: string = this.generarNombreUnico(file.name); //con que nombre la voy a guardar
-
-            file.mv(`${path}/${nombreArchivo}`, (error: any) => {
-                if (error) {
+            console.log("path",path)
+            const nombreArchivo:string = this.generarNombreUnico(file.name); //con que nombre la voy a guardar
+    
+            file.mv(`${path}/${nombreArchivo}`, (error:any)=>{
+                if(error){
                     return reject(error)
                 }
-                else {
+                else{
                     return resolve(true)
                 }
             })
         })
     }
 
+    private obtenerImagenesTemp(userId:string):Array<string>{
 
-    imagenesDeTempHaciaPost(userId: string) {
+        const pathTemp = path.resolve(__dirname, '../uploads', userId, "temp");
+        return fs.readdirSync(pathTemp);
+
+    }
+
+    imagenesDeTempHaciaPost(userId:string):Array<string>{
         const pathUserTemp = path.resolve(__dirname, '../uploads', userId, "temp");//De donde voy a mover la imagen -- origen
         const pathUserPost = path.resolve(__dirname, '../uploads', userId, "post")// Hacia donde lo voy a mover -- destino
 
-        if (!fs.existsSync(pathUserTemp)) {
+        if(!fs.existsSync(pathUserTemp)){
             return []
         }
 
-        if (!fs.existsSync(pathUserPost)) {
+        if(!fs.existsSync(pathUserPost)){
             fs.mkdirSync(pathUserPost)
         }
 
+        const imagenesTemp:Array<string> = this.obtenerImagenesTemp(userId);
 
+        imagenesTemp.forEach(imagenes=>{
+            fs.renameSync(`${pathUserTemp}/${imagenes}` , `${pathUserPost}/${imagenes}`);
+        })
+        
+        return imagenesTemp;
+    }
+
+    getFotoUrl(userId:string, img:string):string{
+
+        const pathFoto:string = path.resolve(__dirname, '../uploads', userId, "post", img);
+        if(fs.existsSync(pathFoto)){
+            return pathFoto
+        }
+        else{
+            return path.resolve(__dirname, '../assets/imagen_default.jpg')
+        }
+    }
+
+    createCarpetaUploads():void{
+        const pathUploads = path.resolve(__dirname, 'uploads');
+
+        if(!fs.existsSync(pathUploads)){
+            fs.mkdirSync(pathUploads);
+        }
     }
 
 }

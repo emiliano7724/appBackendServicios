@@ -5,7 +5,8 @@ import userRoutes from './routes/users';
 import servicioRoutes from './routes/servicios';
 import empleadoRoutes from './routes/empleados';
 import clienteRoutes from './routes/clientes';
-/*import dashboardRoutes from './routes/dashboard'; */
+import dashboardRoutes from './routes/dashboard'; 
+import FileSystem from './class/file-system';
 import fileUpload from 'express-fileupload';
 
 
@@ -21,7 +22,11 @@ server.app.use(bodyPaser.urlencoded({ extended: true }));
 server.app.use(bodyPaser.json());
 
 //upload
+//upload
+const crearFolder = new FileSystem();
+crearFolder.createCarpetaUploads();
 server.app.use(fileUpload());
+
 
 //Rutas aplicacion
 server.app.use('/users', userRoutes);

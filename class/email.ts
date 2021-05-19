@@ -51,7 +51,7 @@ export default class email {
             nodemailer.createTestAccount((error)=>{
                 transporter.sendMail(mailOptions,(error, info)=>{
                     if(error){
-                        reject(error)
+                        reject("Soy el error "+ error)
                     }
                     else{
                         return resolve(info)

@@ -90,6 +90,26 @@ servicioRoutes.get("/verServiciosAsignables", verificarToken, async (req: any, r
     }
 });
 
+
+servicioRoutes.post('/enviarMailTest', async (req:Request, res:Response)=>{
+    const emailEnvio = new emailClass()
+
+    //  console.log(email);
+      try {
+          const envio = await emailEnvio.enviarEmail("marquezemiliano1988@gmail.com", "Asignacion servicio", "Nuevo servicio asignado y creado con exito", "");
+          res.json({
+              estado:"success",
+              mensaje: "Servicio asignado con exito", 
+              emailResult: envio
+          })
+      } catch (error) {
+          res.json({
+              estado:"error",
+              mensaje: "No se pudo enviar el correo", 
+              emailResult: error
+          })
+      }
+});
 servicioRoutes.put("/asignarServicioAempleado", verificarToken, async (req: any, res: Response) => {
     try {
         const body = req.body;
@@ -105,10 +125,10 @@ servicioRoutes.put("/asignarServicioAempleado", verificarToken, async (req: any,
             "UPDATE `frecuencia_horaria` SET `id_empleado` = ?, `updated_at` = ?, `id_usr` = ?, `asignado` = ?" +
             " WHERE `frecuencia_horaria`.`id_frecuencia_horaria` = ?", [id_empleado, updated_at, id_usr, asignado, id_frecuencia_horaria]
         );
-        Object.keys(result).forEach(function (key) {
+        /* Object.keys(result).forEach(function (key) {
             var row = result[key];
             email = row.email;
-        });
+        }); */
 
 
         res.json({
@@ -118,17 +138,9 @@ servicioRoutes.put("/asignarServicioAempleado", verificarToken, async (req: any,
 
         });
         
+   
 
-        const emailEnvio = new emailClass()
-
-
-    const envio = await emailEnvio.enviarEmail(email, "Asignacion servicio", "Nuevo servicio asignado y creado con exito", "");
-
-    res.json({
-        estado:"success",
-        mensaje: "Servicio asignado con exito", 
-        emailResult: envio
-    })
+   
     } catch (error) {
         res.json({ estado: "error", data: error });
     }
