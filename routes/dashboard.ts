@@ -9,7 +9,7 @@ const dashboardRoutes = Router();
 
 
 
-dashboardRoutes.get("/getCantidadEmpleadosSinServicios", verificarToken, async (req: any, res: Response) => {
+dashboardRoutes.get("/getTopEmpleadosConMenosHorasDeServicios", verificarToken, async (req: any, res: Response) => {
     try {
 
         const result = await query(   // hacemos 3 controles para saber q no esta asignada

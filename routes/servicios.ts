@@ -91,7 +91,7 @@ servicioRoutes.get("/verServiciosAsignables", verificarToken, async (req: any, r
 });
 
 
-servicioRoutes.post('/enviarMailTest', async (req:Request, res:Response)=>{
+/* servicioRoutes.post('/enviarMailTest', async (req:Request, res:Response)=>{
     const emailEnvio = new emailClass()
 
     //  console.log(email);
@@ -109,7 +109,8 @@ servicioRoutes.post('/enviarMailTest', async (req:Request, res:Response)=>{
               emailResult: error
           })
       }
-});
+}); */
+
 servicioRoutes.put("/asignarServicioAempleado", verificarToken, async (req: any, res: Response) => {
     try {
         const body = req.body;
@@ -118,25 +119,35 @@ servicioRoutes.put("/asignarServicioAempleado", verificarToken, async (req: any,
         const id_usr = body.id_usr;
         const id_frecuencia_horaria = body.id_frecuencia_horaria;
         const updated_at = new Date();
-        let email:string="";
         const asignado = 1; // harcodeamos en true para asignar el servicio
 
+        
         const result:any = await query(   // hacemos 3 controles para saber q no esta asignada
             "UPDATE `frecuencia_horaria` SET `id_empleado` = ?, `updated_at` = ?, `id_usr` = ?, `asignado` = ?" +
             " WHERE `frecuencia_horaria`.`id_frecuencia_horaria` = ?", [id_empleado, updated_at, id_usr, asignado, id_frecuencia_horaria]
         );
-        /* Object.keys(result).forEach(function (key) {
-            var row = result[key];
-            email = row.email;
-        }); */
+       
 
+        if (result.affectedRows==0) {
+            res.json({
+                estado: "succes",
+                mensaje: "No se realizo ningun cambio",
+                data: result,
+    
+            });
+        }else{
+            res.json({
+                estado: "succes",
+                mensaje: "Servicio asignado con exito",
+                data: result,
+    
+            });
+           
+            enviarCorreoACliente(id_frecuencia_horaria,id_empleado);
+           
+        }
 
-        res.json({
-            estado: "succes",
-            mensaje: "Servicio asignado con exito",
-            data: result,
-
-        });
+       
         
    
 
@@ -234,21 +245,42 @@ servicioRoutes.get("/getMesCalendario", verificarToken, async (req: any, res: Re
 
         const body = req.body;
 
- 
+        let acumuladorSemana1=0;
+        let acumuladorSemana2=0;
+        let acumuladorSemana3=0;
+        let acumuladorSemana4=0;
         const id_empleado = body.id_empleado;
-        const resultSemana1 = await query(   // 
+        const resultSemana1:any = await query(   // 
             "SELECT * FROM `mes_calendario_x_empleado_semana1` where id_empleado=? and ISNULL(`deleted_at`) and `asignado`=1",[id_empleado]
         );
 
-        const resultSemana2 = await query(   // 
+          Object.keys(resultSemana1).forEach(function (key) {
+            var row = resultSemana1[key];
+            acumuladorSemana1+= row.lunes_carga+row.martes_carga+row.miercoles_carga+row.jueves_carga+row.viernes_carga+row.sabado_carga+row.domingo_carga;
+        }); 
+
+        const resultSemana2:any = await query(   // 
             "SELECT * FROM `mes_calendario_x_empleado_semana2` where id_empleado=? and ISNULL(`deleted_at`) and `asignado`=1",[id_empleado]
         );
-        const resultSemana3 = await query(   // 
+        Object.keys(resultSemana2).forEach(function (key) {
+            var row = resultSemana2[key];
+            acumuladorSemana2+= row.lunes_carga+row.martes_carga+row.miercoles_carga+row.jueves_carga+row.viernes_carga+row.sabado_carga+row.domingo_carga;
+        }); 
+        const resultSemana3:any = await query(   // 
             "SELECT * FROM `mes_calendario_x_empleado_semana3` where id_empleado=? and ISNULL(`deleted_at`) and `asignado`=1",[id_empleado]
         );
-        const resultSemana4 = await query(   // 
+        Object.keys(resultSemana3).forEach(function (key) {
+            var row = resultSemana3[key];
+            acumuladorSemana3+= row.lunes_carga+row.martes_carga+row.miercoles_carga+row.jueves_carga+row.viernes_carga+row.sabado_carga+row.domingo_carga;
+        }); 
+        const resultSemana4:any = await query(   // 
             "SELECT * FROM `mes_calendario_x_empleado_semana4` where id_empleado=? and ISNULL(`deleted_at`) and `asignado`=1",[id_empleado]
         );
+        Object.keys(resultSemana4).forEach(function (key) {
+            var row = resultSemana4[key];
+            acumuladorSemana4+= row.lunes_carga+row.martes_carga+row.miercoles_carga+row.jueves_carga+row.viernes_carga+row.sabado_carga+row.domingo_carga;
+        }); 
+        const totalCargaHorario=acumuladorSemana1+acumuladorSemana2+acumuladorSemana3+acumuladorSemana4;
         res.json({
             estado: "succes",
             mensaje: "Servicio Mensuales retornados con exito",
@@ -257,9 +289,12 @@ servicioRoutes.get("/getMesCalendario", verificarToken, async (req: any, res: Re
                 s2:resultSemana2,
                 s3:resultSemana3,
                 s4:resultSemana4,
-            }
+            },
+            totalCargaHorario:totalCargaHorario
         }
         });
+  
+
     } catch (error) {
         res.json({ estado: "error", data: error });
     }
@@ -268,5 +303,53 @@ servicioRoutes.get("/getMesCalendario", verificarToken, async (req: any, res: Re
 ///// FUNCIONES
 
 
+
 export default servicioRoutes;
+
+async function enviarCorreoACliente(id_frecuencia_horaria: number,id_empleado:number) {
+ 
+
+    let emailCliente:string="";
+    let nombreCliente:string="";
+
+    let nombreEmpleado:string="";
+    let dniEmpleado:number=0;
+    
+
+    const resultCliente:any = await query("SELECT * FROM `cliente` INNER join frecuencia_horaria on frecuencia_horaria.id_cliente=cliente.id_cliente WHERE id_frecuencia_horaria=?",[id_frecuencia_horaria]);
+    Object.keys(resultCliente).forEach(function (key) {
+        var row = resultCliente[key];
+        emailCliente = row.email;
+        nombreCliente=row.nombre;
+    }); 
+
+    const resultEmpleado:any = await query("SELECT * FROM `empleado` WHERE id_empleado=?",[id_empleado]);
+    Object.keys(resultEmpleado).forEach(function (key) {
+        var row = resultEmpleado[key];
+        nombreEmpleado = row.nombre;
+        dniEmpleado=row.dni;
+    });     
+
+///////////////////////////ENVIAMOS MAIL
+    try {
+        const emailEnvio = new emailClass();
+        const asunto="Asignacion servicio";
+        const cuerpoTexto="Estimado "+nombreCliente+" le informamos que ha sido asignado el Empleado Nombre: "+nombreEmpleado+" y DNI: "+dniEmpleado+" para realizar el servico de limpieza";
+        const envio = await emailEnvio.enviarEmail(emailCliente,asunto ,cuerpoTexto , "");
+        
+      /*   res.json({
+            estado:"success",
+            mensaje: "Email con exito", 
+            emailResult: envio
+        }) */
+    } catch (error) {
+       /*  res.json({
+            estado:"error",
+            mensaje: "No se pudo enviar el correo", 
+            emailResult: error
+        }) */
+    }
+    /////////////////////////// FIN ENVIAMOS MAIL
+
+}
 
