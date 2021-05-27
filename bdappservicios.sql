@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-05-2021 a las 17:58:43
+-- Tiempo de generación: 20-05-2021 a las 17:56:26
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.4.7
 
@@ -48,9 +48,10 @@ CREATE TABLE `cliente` (
 
 INSERT INTO `cliente` (`id_cliente`, `nombre`, `cuit`, `telefono`, `email`, `id_localidad`, `id_categoria_iva`, `direccion`, `created_at`, `updated_at`, `deleted_at`, `id_user`) VALUES
 (1, 'cliente1 modif', 20339626724123, '250', 'cli1@gmail.com', 1, 2, 'Juan de Garay 1254', '2021-04-07 17:34:27', '2021-05-19 12:19:17', '2021-05-19 12:19:17', 2),
-(3, 'CLIENTE 2', 0, '345851233', 'cliente2@cliente2.com', 2, 1, '25 de mayo 2778', '2021-04-07 17:34:27', NULL, NULL, 1),
+(3, 'CLIENTE 2', 0, '345851233', 'marquezemiliano1988@gmail.com', 2, 1, '25 de mayo 2778', '2021-04-07 17:34:27', NULL, NULL, 1),
 (4, 'CLIENTE3', 0, '35231566', 'cliente3@gmail.com', 1, 1, 'san martin 2536', '2021-05-19 10:53:37', NULL, NULL, 3),
-(5, 'cliente 4', 2021354565, '4203746', 'cliente4@gmail.com', 2, 2, 'gral lopez 2358', '2021-05-19 11:52:09', NULL, NULL, 3);
+(5, 'cliente 4', 2021354565, '4203746', 'cliente4@gmail.com', 2, 2, 'gral lopez 2358', '2021-05-19 11:52:09', NULL, NULL, 3),
+(6, 'cliente 6', 2021354565, '4203746', 'cliente6@gmail.com', 2, 2, 'gral lopez 2358', '2021-05-20 08:53:09', NULL, NULL, 3);
 
 -- --------------------------------------------------------
 
@@ -219,7 +220,8 @@ CREATE TABLE `frecuencia_horaria` (
 --
 
 INSERT INTO `frecuencia_horaria` (`id_frecuencia_horaria`, `id_cliente`, `id_empleado`, `hora_ingreso_lunes_semana_1`, `hora_egreso_lunes_semana_1`, `lunes_semana_1_estado`, `hora_ingreso_martes_semana_1`, `hora_egreso_martes_semana_1`, `martes_semana_1_estado`, `hora_ingreso_miercoles_semana_1`, `hora_egreso_miercoles_semana_1`, `miercoles_semana_1_estado`, `hora_ingreso_jueves_semana_1`, `hora_egreso_jueves_semana_1`, `jueves_semana_1_estado`, `hora_ingreso_viernes_semana_1`, `hora_egreso_viernes_semana_1`, `viernes_semana_1_estado`, `hora_ingreso_sabado_semana_1`, `hora_egreso_sabado_semana_1`, `sabado_semana_1_estado`, `hora_ingreso_domingo_semana_1`, `hora_egreso_domingo_semana_1`, `domingo_semana_1_estado`, `hora_ingreso_lunes_semana_2`, `hora_egreso_lunes_semana_2`, `lunes_semana_2_estado`, `hora_ingreso_martes_semana_2`, `hora_egreso_martes_semana_2`, `martes_semana_2_estado`, `hora_ingreso_miercoles_semana_2`, `hora_egreso_miercoles_semana_2`, `miercoles_semana_2_estado`, `hora_ingreso_jueves_semana_2`, `hora_egreso_jueves_semana_2`, `jueves_semana_2_estado`, `hora_ingreso_viernes_semana_2`, `hora_egreso_viernes_semana_2`, `viernes_semana_2_estado`, `hora_ingreso_sabado_semana_2`, `hora_egreso_sabado_semana_2`, `sabado_semana_2_estado`, `hora_ingreso_domingo_semana_2`, `hora_egreso_domingo_semana_2`, `domingo_semana_2_estado`, `hora_ingreso_lunes_semana_3`, `hora_egreso_lunes_semana_3`, `lunes_semana_3_estado`, `hora_ingreso_martes_semana_3`, `hora_egreso_martes_semana_3`, `martes_semana_3_estado`, `hora_ingreso_miercoles_semana_3`, `hora_egreso_miercoles_semana_3`, `miercoles_semana_3_estado`, `hora_ingreso_jueves_semana_3`, `hora_egreso_jueves_semana_3`, `jueves_semana_3_estado`, `hora_ingreso_viernes_semana_3`, `hora_egreso_viernes_semana_3`, `viernes_semana_3_estado`, `hora_ingreso_sabado_semana_3`, `hora_egreso_sabado_semana_3`, `sabado_semana_3_estado`, `hora_ingreso_domingo_semana_3`, `hora_egreso_domingo_semana_3`, `domingo_semana_3_estado`, `hora_ingreso_lunes_semana_4`, `hora_egreso_lunes_semana_4`, `lunes_semana_4_estado`, `hora_ingreso_martes_semana_4`, `hora_egreso_martes_semana_4`, `martes_semana_4_estado`, `hora_ingreso_miercoles_semana_4`, `hora_egreso_miercoles_semana_4`, `miercoles_semana_4_estado`, `hora_ingreso_jueves_semana_4`, `hora_egreso_jueves_semana_4`, `jueves_semana_4_estado`, `hora_ingreso_viernes_semana_4`, `hora_egreso_viernes_semana_4`, `viernes_semana_4_estado`, `hora_ingreso_sabado_semana_4`, `hora_egreso_sabado_semana_4`, `sabado_semana_4_estado`, `hora_ingreso_domingo_semana_4`, `hora_egreso_domingo_semana_4`, `domingo_semana_4_estado`, `created_at`, `updated_at`, `deleted_at`, `id_usr`, `asignado`) VALUES
-(13, 1, 1, '16:00:00', '19:00:00', 1, '17:00:00', '20:00:00', 1, '08:00:00', '14:00:00', 1, '09:00:00', '15:00:00', 1, '17:30:00', '21:00:00', 1, '06:00:00', '12:00:00', 1, '09:00:00', '11:30:00', 1, '16:00:00', '19:00:00', 1, '17:00:00', '20:00:00', 1, '08:00:00', '14:00:00', 1, '09:00:00', '15:00:00', 1, '17:30:00', '21:00:00', 1, '06:00:00', '12:00:00', 1, '09:00:00', '11:30:00', 1, '16:00:00', '19:00:00', 1, '17:00:00', '20:00:00', 1, '08:00:00', '14:00:00', 1, '09:00:00', '15:00:00', 1, '17:30:00', '21:00:00', 1, '06:00:00', '12:00:00', 1, '09:00:00', '11:30:00', 1, '16:00:00', '19:00:00', 1, '17:00:00', '20:00:00', 1, '08:00:00', '14:00:00', 1, '09:00:00', '15:00:00', 1, '17:30:00', '21:00:00', 1, '06:00:00', '12:00:00', 1, '09:00:00', '11:30:00', 1, '2021-05-18 10:04:29', NULL, NULL, 2, 1);
+(13, 3, 3, '16:00:00', '19:00:00', 1, '17:00:00', '20:00:00', 1, '08:00:00', '14:00:00', 1, '09:00:00', '15:00:00', 1, '17:30:00', '21:00:00', 1, '06:00:00', '12:00:00', 1, '09:00:00', '11:30:00', 1, '16:00:00', '19:00:00', 1, '17:00:00', '20:00:00', 1, '08:00:00', '14:00:00', 1, '09:00:00', '15:00:00', 1, '17:30:00', '21:00:00', 1, '06:00:00', '12:00:00', 1, '09:00:00', '11:30:00', 1, '16:00:00', '19:00:00', 1, '17:00:00', '20:00:00', 1, '08:00:00', '14:00:00', 1, '09:00:00', '15:00:00', 1, '17:30:00', '21:00:00', 1, '06:00:00', '12:00:00', 1, '09:00:00', '11:30:00', 1, '16:00:00', '17:00:00', 1, '17:00:00', '20:00:00', 1, '08:00:00', '14:00:00', 1, '09:00:00', '15:00:00', 1, '17:30:00', '21:00:00', 1, '06:00:00', '12:00:00', 1, '09:00:00', '11:30:00', 1, '2021-05-18 10:04:29', '2021-05-20 12:29:30', NULL, 3, 1),
+(14, 1, 2, '07:00:00', '12:00:00', 1, '17:00:00', '20:00:00', 1, '08:00:00', '14:00:00', 1, '09:00:00', '15:00:00', 1, '17:30:00', '21:00:00', 1, '06:00:00', '12:00:00', 1, '09:00:00', '11:30:00', 1, '07:00:00', '12:00:00', 1, '17:00:00', '20:00:00', 1, '08:00:00', '14:00:00', 1, '09:00:00', '15:00:00', 1, '17:30:00', '21:00:00', 1, '06:00:00', '12:00:00', 1, '09:00:00', '11:30:00', 1, '07:00:00', '12:00:00', 1, '17:00:00', '20:00:00', 1, '08:00:00', '14:00:00', 1, '09:00:00', '15:00:00', 1, '17:30:00', '21:00:00', 1, '06:00:00', '12:00:00', 1, '09:00:00', '11:30:00', 1, '07:00:00', '12:00:00', 1, '17:00:00', '20:00:00', 1, '08:00:00', '14:00:00', 1, '09:00:00', '15:00:00', 1, '17:30:00', '21:00:00', 1, '06:00:00', '12:00:00', 1, '09:00:00', '11:30:00', 1, '2021-05-20 08:50:05', NULL, NULL, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -279,19 +281,19 @@ CREATE TABLE `mes_calendario_x_empleado_semana1` (
 ,`nombre` varchar(150)
 ,`id_empleado` int(11)
 ,`LUNES` varchar(23)
-,`lunes_carga` time
+,`lunes_carga` decimal(10,1)
 ,`MARTES` varchar(23)
-,`martes_carga` time
+,`martes_carga` decimal(10,1)
 ,`MIERCOLES` varchar(23)
-,`miercoles_carga` time
+,`miercoles_carga` decimal(10,1)
 ,`JUEVES` varchar(23)
-,`jueves_carga` time
+,`jueves_carga` decimal(10,1)
 ,`VIERNES` varchar(23)
-,`viernes_carga` time
+,`viernes_carga` decimal(10,1)
 ,`SABADO` varchar(23)
-,`sabado_carga` time
+,`sabado_carga` decimal(10,1)
 ,`DOMINGO` varchar(23)
-,`domingo_carga` time
+,`domingo_carga` decimal(10,1)
 );
 
 -- --------------------------------------------------------
@@ -307,19 +309,19 @@ CREATE TABLE `mes_calendario_x_empleado_semana2` (
 ,`nombre` varchar(150)
 ,`id_empleado` int(11)
 ,`LUNES` varchar(23)
-,`lunes_carga` time
+,`lunes_carga` decimal(10,1)
 ,`MARTES` varchar(23)
-,`martes_carga` time
+,`martes_carga` decimal(10,1)
 ,`MIERCOLES` varchar(23)
-,`miercoles_carga` time
+,`miercoles_carga` decimal(10,1)
 ,`JUEVES` varchar(23)
-,`jueves_carga` time
+,`jueves_carga` decimal(10,1)
 ,`VIERNES` varchar(23)
-,`viernes_carga` time
+,`viernes_carga` decimal(10,1)
 ,`SABADO` varchar(23)
-,`sabado_carga` time
+,`sabado_carga` decimal(10,1)
 ,`DOMINGO` varchar(23)
-,`domingo_carga` time
+,`domingo_carga` decimal(10,1)
 );
 
 -- --------------------------------------------------------
@@ -335,19 +337,19 @@ CREATE TABLE `mes_calendario_x_empleado_semana3` (
 ,`nombre` varchar(150)
 ,`id_empleado` int(11)
 ,`LUNES` varchar(23)
-,`lunes_carga` time
+,`lunes_carga` decimal(10,1)
 ,`MARTES` varchar(23)
-,`martes_carga` time
+,`martes_carga` decimal(10,1)
 ,`MIERCOLES` varchar(23)
-,`miercoles_carga` time
+,`miercoles_carga` decimal(10,1)
 ,`JUEVES` varchar(23)
-,`jueves_carga` time
+,`jueves_carga` decimal(10,1)
 ,`VIERNES` varchar(23)
-,`viernes_carga` time
+,`viernes_carga` decimal(10,1)
 ,`SABADO` varchar(23)
-,`sabado_carga` time
+,`sabado_carga` decimal(10,1)
 ,`DOMINGO` varchar(23)
-,`domingo_carga` time
+,`domingo_carga` decimal(10,1)
 );
 
 -- --------------------------------------------------------
@@ -363,19 +365,19 @@ CREATE TABLE `mes_calendario_x_empleado_semana4` (
 ,`nombre` varchar(150)
 ,`id_empleado` int(11)
 ,`LUNES` varchar(23)
-,`lunes_carga` time
+,`lunes_carga` decimal(10,1)
 ,`MARTES` varchar(23)
-,`martes_carga` time
+,`martes_carga` decimal(10,1)
 ,`MIERCOLES` varchar(23)
-,`miercoles_carga` time
+,`miercoles_carga` decimal(10,1)
 ,`JUEVES` varchar(23)
-,`jueves_carga` time
+,`jueves_carga` decimal(10,1)
 ,`VIERNES` varchar(23)
-,`viernes_carga` time
+,`viernes_carga` decimal(10,1)
 ,`SABADO` varchar(23)
-,`sabado_carga` time
+,`sabado_carga` decimal(10,1)
 ,`DOMINGO` varchar(23)
-,`domingo_carga` time
+,`domingo_carga` decimal(10,1)
 );
 
 -- --------------------------------------------------------
@@ -481,7 +483,7 @@ INSERT INTO `usuario` (`id_user`, `name`, `password`, `email`, `id_empresa`, `id
 --
 DROP TABLE IF EXISTS `mes_calendario_x_empleado_semana1`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mes_calendario_x_empleado_semana1`  AS  select `frecuencia_horaria`.`deleted_at` AS `deleted_at`,`frecuencia_horaria`.`asignado` AS `asignado`,`frecuencia_horaria`.`id_frecuencia_horaria` AS `id_frecuencia_horaria`,`cliente`.`nombre` AS `nombre`,`frecuencia_horaria`.`id_empleado` AS `id_empleado`,concat(`frecuencia_horaria`.`hora_ingreso_lunes_semana_1`,' a ',`frecuencia_horaria`.`hora_egreso_lunes_semana_1`) AS `LUNES`,timediff(`frecuencia_horaria`.`hora_egreso_lunes_semana_1`,`frecuencia_horaria`.`hora_ingreso_lunes_semana_1`) AS `lunes_carga`,concat(`frecuencia_horaria`.`hora_ingreso_martes_semana_1`,' a ',`frecuencia_horaria`.`hora_egreso_martes_semana_1`) AS `MARTES`,timediff(`frecuencia_horaria`.`hora_egreso_martes_semana_1`,`frecuencia_horaria`.`hora_ingreso_martes_semana_1`) AS `martes_carga`,concat(`frecuencia_horaria`.`hora_ingreso_miercoles_semana_1`,' a ',`frecuencia_horaria`.`hora_egreso_miercoles_semana_1`) AS `MIERCOLES`,timediff(`frecuencia_horaria`.`hora_egreso_miercoles_semana_1`,`frecuencia_horaria`.`hora_ingreso_miercoles_semana_1`) AS `miercoles_carga`,concat(`frecuencia_horaria`.`hora_ingreso_jueves_semana_1`,' a ',`frecuencia_horaria`.`hora_egreso_jueves_semana_1`) AS `JUEVES`,timediff(`frecuencia_horaria`.`hora_egreso_jueves_semana_1`,`frecuencia_horaria`.`hora_ingreso_jueves_semana_1`) AS `jueves_carga`,concat(`frecuencia_horaria`.`hora_ingreso_viernes_semana_1`,' a ',`frecuencia_horaria`.`hora_egreso_viernes_semana_1`) AS `VIERNES`,timediff(`frecuencia_horaria`.`hora_egreso_viernes_semana_1`,`frecuencia_horaria`.`hora_ingreso_viernes_semana_1`) AS `viernes_carga`,concat(`frecuencia_horaria`.`hora_ingreso_sabado_semana_1`,' a ',`frecuencia_horaria`.`hora_egreso_sabado_semana_1`) AS `SABADO`,timediff(`frecuencia_horaria`.`hora_egreso_sabado_semana_1`,`frecuencia_horaria`.`hora_ingreso_sabado_semana_1`) AS `sabado_carga`,concat(`frecuencia_horaria`.`hora_ingreso_domingo_semana_1`,' a ',`frecuencia_horaria`.`hora_egreso_domingo_semana_1`) AS `DOMINGO`,timediff(`frecuencia_horaria`.`hora_egreso_domingo_semana_1`,`frecuencia_horaria`.`hora_ingreso_domingo_semana_1`) AS `domingo_carga` from ((`empleado` left join `frecuencia_horaria` on(`frecuencia_horaria`.`id_empleado` = `empleado`.`id_empleado`)) left join `cliente` on(`frecuencia_horaria`.`id_cliente` = `cliente`.`id_cliente`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mes_calendario_x_empleado_semana1`  AS  select `frecuencia_horaria`.`deleted_at` AS `deleted_at`,`frecuencia_horaria`.`asignado` AS `asignado`,`frecuencia_horaria`.`id_frecuencia_horaria` AS `id_frecuencia_horaria`,`cliente`.`nombre` AS `nombre`,`frecuencia_horaria`.`id_empleado` AS `id_empleado`,concat(`frecuencia_horaria`.`hora_ingreso_lunes_semana_1`,' a ',`frecuencia_horaria`.`hora_egreso_lunes_semana_1`) AS `LUNES`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_lunes_semana_1`,`frecuencia_horaria`.`hora_ingreso_lunes_semana_1`)) / (60 * 60) as decimal(10,1)) AS `lunes_carga`,concat(`frecuencia_horaria`.`hora_ingreso_martes_semana_1`,' a ',`frecuencia_horaria`.`hora_egreso_martes_semana_1`) AS `MARTES`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_martes_semana_1`,`frecuencia_horaria`.`hora_ingreso_martes_semana_1`)) / (60 * 60) as decimal(10,1)) AS `martes_carga`,concat(`frecuencia_horaria`.`hora_ingreso_miercoles_semana_1`,' a ',`frecuencia_horaria`.`hora_egreso_miercoles_semana_1`) AS `MIERCOLES`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_miercoles_semana_1`,`frecuencia_horaria`.`hora_ingreso_miercoles_semana_1`)) / (60 * 60) as decimal(10,1)) AS `miercoles_carga`,concat(`frecuencia_horaria`.`hora_ingreso_jueves_semana_1`,' a ',`frecuencia_horaria`.`hora_egreso_jueves_semana_1`) AS `JUEVES`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_jueves_semana_1`,`frecuencia_horaria`.`hora_ingreso_jueves_semana_1`)) / (60 * 60) as decimal(10,1)) AS `jueves_carga`,concat(`frecuencia_horaria`.`hora_ingreso_viernes_semana_1`,' a ',`frecuencia_horaria`.`hora_egreso_viernes_semana_1`) AS `VIERNES`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_viernes_semana_1`,`frecuencia_horaria`.`hora_ingreso_viernes_semana_1`)) / (60 * 60) as decimal(10,1)) AS `viernes_carga`,concat(`frecuencia_horaria`.`hora_ingreso_sabado_semana_1`,' a ',`frecuencia_horaria`.`hora_egreso_sabado_semana_1`) AS `SABADO`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_sabado_semana_1`,`frecuencia_horaria`.`hora_ingreso_sabado_semana_1`)) / (60 * 60) as decimal(10,1)) AS `sabado_carga`,concat(`frecuencia_horaria`.`hora_ingreso_domingo_semana_1`,' a ',`frecuencia_horaria`.`hora_egreso_domingo_semana_1`) AS `DOMINGO`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_domingo_semana_1`,`frecuencia_horaria`.`hora_ingreso_domingo_semana_1`)) / (60 * 60) as decimal(10,1)) AS `domingo_carga` from ((`empleado` join `frecuencia_horaria` on(`frecuencia_horaria`.`id_empleado` = `empleado`.`id_empleado`)) join `cliente` on(`frecuencia_horaria`.`id_cliente` = `cliente`.`id_cliente`)) ;
 
 -- --------------------------------------------------------
 
@@ -490,7 +492,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `mes_calendario_x_empleado_semana2`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mes_calendario_x_empleado_semana2`  AS  select `frecuencia_horaria`.`deleted_at` AS `deleted_at`,`frecuencia_horaria`.`asignado` AS `asignado`,`frecuencia_horaria`.`id_frecuencia_horaria` AS `id_frecuencia_horaria`,`cliente`.`nombre` AS `nombre`,`frecuencia_horaria`.`id_empleado` AS `id_empleado`,concat(`frecuencia_horaria`.`hora_ingreso_lunes_semana_2`,' a ',`frecuencia_horaria`.`hora_egreso_lunes_semana_2`) AS `LUNES`,timediff(`frecuencia_horaria`.`hora_egreso_lunes_semana_2`,`frecuencia_horaria`.`hora_ingreso_lunes_semana_2`) AS `lunes_carga`,concat(`frecuencia_horaria`.`hora_ingreso_martes_semana_2`,' a ',`frecuencia_horaria`.`hora_egreso_martes_semana_2`) AS `MARTES`,timediff(`frecuencia_horaria`.`hora_egreso_martes_semana_2`,`frecuencia_horaria`.`hora_ingreso_martes_semana_2`) AS `martes_carga`,concat(`frecuencia_horaria`.`hora_ingreso_miercoles_semana_2`,' a ',`frecuencia_horaria`.`hora_egreso_miercoles_semana_2`) AS `MIERCOLES`,timediff(`frecuencia_horaria`.`hora_egreso_miercoles_semana_2`,`frecuencia_horaria`.`hora_ingreso_miercoles_semana_2`) AS `miercoles_carga`,concat(`frecuencia_horaria`.`hora_ingreso_jueves_semana_2`,' a ',`frecuencia_horaria`.`hora_egreso_jueves_semana_2`) AS `JUEVES`,timediff(`frecuencia_horaria`.`hora_egreso_jueves_semana_2`,`frecuencia_horaria`.`hora_ingreso_jueves_semana_2`) AS `jueves_carga`,concat(`frecuencia_horaria`.`hora_ingreso_viernes_semana_2`,' a ',`frecuencia_horaria`.`hora_egreso_viernes_semana_2`) AS `VIERNES`,timediff(`frecuencia_horaria`.`hora_egreso_viernes_semana_2`,`frecuencia_horaria`.`hora_ingreso_viernes_semana_2`) AS `viernes_carga`,concat(`frecuencia_horaria`.`hora_ingreso_sabado_semana_2`,' a ',`frecuencia_horaria`.`hora_egreso_sabado_semana_2`) AS `SABADO`,timediff(`frecuencia_horaria`.`hora_egreso_sabado_semana_2`,`frecuencia_horaria`.`hora_ingreso_sabado_semana_2`) AS `sabado_carga`,concat(`frecuencia_horaria`.`hora_ingreso_domingo_semana_2`,' a ',`frecuencia_horaria`.`hora_egreso_domingo_semana_2`) AS `DOMINGO`,timediff(`frecuencia_horaria`.`hora_egreso_domingo_semana_2`,`frecuencia_horaria`.`hora_ingreso_domingo_semana_2`) AS `domingo_carga` from ((`empleado` left join `frecuencia_horaria` on(`frecuencia_horaria`.`id_empleado` = `empleado`.`id_empleado`)) left join `cliente` on(`frecuencia_horaria`.`id_cliente` = `cliente`.`id_cliente`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mes_calendario_x_empleado_semana2`  AS  select `frecuencia_horaria`.`deleted_at` AS `deleted_at`,`frecuencia_horaria`.`asignado` AS `asignado`,`frecuencia_horaria`.`id_frecuencia_horaria` AS `id_frecuencia_horaria`,`cliente`.`nombre` AS `nombre`,`frecuencia_horaria`.`id_empleado` AS `id_empleado`,concat(`frecuencia_horaria`.`hora_ingreso_lunes_semana_2`,' a ',`frecuencia_horaria`.`hora_egreso_lunes_semana_2`) AS `LUNES`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_lunes_semana_2`,`frecuencia_horaria`.`hora_ingreso_lunes_semana_2`)) / (60 * 60) as decimal(10,1)) AS `lunes_carga`,concat(`frecuencia_horaria`.`hora_ingreso_martes_semana_2`,' a ',`frecuencia_horaria`.`hora_egreso_martes_semana_2`) AS `MARTES`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_martes_semana_2`,`frecuencia_horaria`.`hora_ingreso_martes_semana_2`)) / (60 * 60) as decimal(10,1)) AS `martes_carga`,concat(`frecuencia_horaria`.`hora_ingreso_miercoles_semana_2`,' a ',`frecuencia_horaria`.`hora_egreso_miercoles_semana_2`) AS `MIERCOLES`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_miercoles_semana_2`,`frecuencia_horaria`.`hora_ingreso_miercoles_semana_2`)) / (60 * 60) as decimal(10,1)) AS `miercoles_carga`,concat(`frecuencia_horaria`.`hora_ingreso_jueves_semana_2`,' a ',`frecuencia_horaria`.`hora_egreso_jueves_semana_2`) AS `JUEVES`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_jueves_semana_2`,`frecuencia_horaria`.`hora_ingreso_jueves_semana_2`)) / (60 * 60) as decimal(10,1)) AS `jueves_carga`,concat(`frecuencia_horaria`.`hora_ingreso_viernes_semana_2`,' a ',`frecuencia_horaria`.`hora_egreso_viernes_semana_2`) AS `VIERNES`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_viernes_semana_2`,`frecuencia_horaria`.`hora_ingreso_viernes_semana_2`)) / (60 * 60) as decimal(10,1)) AS `viernes_carga`,concat(`frecuencia_horaria`.`hora_ingreso_sabado_semana_2`,' a ',`frecuencia_horaria`.`hora_egreso_sabado_semana_2`) AS `SABADO`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_sabado_semana_2`,`frecuencia_horaria`.`hora_ingreso_sabado_semana_2`)) / (60 * 60) as decimal(10,1)) AS `sabado_carga`,concat(`frecuencia_horaria`.`hora_ingreso_domingo_semana_2`,' a ',`frecuencia_horaria`.`hora_egreso_domingo_semana_2`) AS `DOMINGO`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_domingo_semana_2`,`frecuencia_horaria`.`hora_ingreso_domingo_semana_2`)) / (60 * 60) as decimal(10,1)) AS `domingo_carga` from ((`empleado` join `frecuencia_horaria` on(`frecuencia_horaria`.`id_empleado` = `empleado`.`id_empleado`)) join `cliente` on(`frecuencia_horaria`.`id_cliente` = `cliente`.`id_cliente`)) ;
 
 -- --------------------------------------------------------
 
@@ -499,7 +501,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `mes_calendario_x_empleado_semana3`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mes_calendario_x_empleado_semana3`  AS  select `frecuencia_horaria`.`deleted_at` AS `deleted_at`,`frecuencia_horaria`.`asignado` AS `asignado`,`frecuencia_horaria`.`id_frecuencia_horaria` AS `id_frecuencia_horaria`,`cliente`.`nombre` AS `nombre`,`frecuencia_horaria`.`id_empleado` AS `id_empleado`,concat(`frecuencia_horaria`.`hora_ingreso_lunes_semana_3`,' a ',`frecuencia_horaria`.`hora_egreso_lunes_semana_3`) AS `LUNES`,timediff(`frecuencia_horaria`.`hora_egreso_lunes_semana_3`,`frecuencia_horaria`.`hora_ingreso_lunes_semana_3`) AS `lunes_carga`,concat(`frecuencia_horaria`.`hora_ingreso_martes_semana_3`,' a ',`frecuencia_horaria`.`hora_egreso_martes_semana_3`) AS `MARTES`,timediff(`frecuencia_horaria`.`hora_egreso_martes_semana_3`,`frecuencia_horaria`.`hora_ingreso_martes_semana_3`) AS `martes_carga`,concat(`frecuencia_horaria`.`hora_ingreso_miercoles_semana_3`,' a ',`frecuencia_horaria`.`hora_egreso_miercoles_semana_3`) AS `MIERCOLES`,timediff(`frecuencia_horaria`.`hora_egreso_miercoles_semana_3`,`frecuencia_horaria`.`hora_ingreso_miercoles_semana_3`) AS `miercoles_carga`,concat(`frecuencia_horaria`.`hora_ingreso_jueves_semana_3`,' a ',`frecuencia_horaria`.`hora_egreso_jueves_semana_3`) AS `JUEVES`,timediff(`frecuencia_horaria`.`hora_egreso_jueves_semana_3`,`frecuencia_horaria`.`hora_ingreso_jueves_semana_3`) AS `jueves_carga`,concat(`frecuencia_horaria`.`hora_ingreso_viernes_semana_3`,' a ',`frecuencia_horaria`.`hora_egreso_viernes_semana_3`) AS `VIERNES`,timediff(`frecuencia_horaria`.`hora_egreso_viernes_semana_3`,`frecuencia_horaria`.`hora_ingreso_viernes_semana_3`) AS `viernes_carga`,concat(`frecuencia_horaria`.`hora_ingreso_sabado_semana_3`,' a ',`frecuencia_horaria`.`hora_egreso_sabado_semana_3`) AS `SABADO`,timediff(`frecuencia_horaria`.`hora_egreso_sabado_semana_3`,`frecuencia_horaria`.`hora_ingreso_sabado_semana_3`) AS `sabado_carga`,concat(`frecuencia_horaria`.`hora_ingreso_domingo_semana_3`,' a ',`frecuencia_horaria`.`hora_egreso_domingo_semana_3`) AS `DOMINGO`,timediff(`frecuencia_horaria`.`hora_egreso_domingo_semana_3`,`frecuencia_horaria`.`hora_ingreso_domingo_semana_3`) AS `domingo_carga` from ((`empleado` left join `frecuencia_horaria` on(`frecuencia_horaria`.`id_empleado` = `empleado`.`id_empleado`)) left join `cliente` on(`frecuencia_horaria`.`id_cliente` = `cliente`.`id_cliente`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mes_calendario_x_empleado_semana3`  AS  select `frecuencia_horaria`.`deleted_at` AS `deleted_at`,`frecuencia_horaria`.`asignado` AS `asignado`,`frecuencia_horaria`.`id_frecuencia_horaria` AS `id_frecuencia_horaria`,`cliente`.`nombre` AS `nombre`,`frecuencia_horaria`.`id_empleado` AS `id_empleado`,concat(`frecuencia_horaria`.`hora_ingreso_lunes_semana_3`,' a ',`frecuencia_horaria`.`hora_egreso_lunes_semana_3`) AS `LUNES`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_lunes_semana_3`,`frecuencia_horaria`.`hora_ingreso_lunes_semana_3`)) / (60 * 60) as decimal(10,1)) AS `lunes_carga`,concat(`frecuencia_horaria`.`hora_ingreso_martes_semana_3`,' a ',`frecuencia_horaria`.`hora_egreso_martes_semana_3`) AS `MARTES`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_martes_semana_3`,`frecuencia_horaria`.`hora_ingreso_martes_semana_3`)) / (60 * 60) as decimal(10,1)) AS `martes_carga`,concat(`frecuencia_horaria`.`hora_ingreso_miercoles_semana_3`,' a ',`frecuencia_horaria`.`hora_egreso_miercoles_semana_3`) AS `MIERCOLES`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_miercoles_semana_3`,`frecuencia_horaria`.`hora_ingreso_miercoles_semana_3`)) / (60 * 60) as decimal(10,1)) AS `miercoles_carga`,concat(`frecuencia_horaria`.`hora_ingreso_jueves_semana_3`,' a ',`frecuencia_horaria`.`hora_egreso_jueves_semana_3`) AS `JUEVES`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_jueves_semana_3`,`frecuencia_horaria`.`hora_ingreso_jueves_semana_3`)) / (60 * 60) as decimal(10,1)) AS `jueves_carga`,concat(`frecuencia_horaria`.`hora_ingreso_viernes_semana_3`,' a ',`frecuencia_horaria`.`hora_egreso_viernes_semana_3`) AS `VIERNES`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_viernes_semana_3`,`frecuencia_horaria`.`hora_ingreso_viernes_semana_3`)) / (60 * 60) as decimal(10,1)) AS `viernes_carga`,concat(`frecuencia_horaria`.`hora_ingreso_sabado_semana_3`,' a ',`frecuencia_horaria`.`hora_egreso_sabado_semana_3`) AS `SABADO`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_sabado_semana_3`,`frecuencia_horaria`.`hora_ingreso_sabado_semana_3`)) / (60 * 60) as decimal(10,1)) AS `sabado_carga`,concat(`frecuencia_horaria`.`hora_ingreso_domingo_semana_3`,' a ',`frecuencia_horaria`.`hora_egreso_domingo_semana_3`) AS `DOMINGO`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_domingo_semana_3`,`frecuencia_horaria`.`hora_ingreso_domingo_semana_3`)) / (60 * 60) as decimal(10,1)) AS `domingo_carga` from ((`empleado` join `frecuencia_horaria` on(`frecuencia_horaria`.`id_empleado` = `empleado`.`id_empleado`)) join `cliente` on(`frecuencia_horaria`.`id_cliente` = `cliente`.`id_cliente`)) ;
 
 -- --------------------------------------------------------
 
@@ -508,7 +510,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `mes_calendario_x_empleado_semana4`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mes_calendario_x_empleado_semana4`  AS  select `frecuencia_horaria`.`deleted_at` AS `deleted_at`,`frecuencia_horaria`.`asignado` AS `asignado`,`frecuencia_horaria`.`id_frecuencia_horaria` AS `id_frecuencia_horaria`,`cliente`.`nombre` AS `nombre`,`frecuencia_horaria`.`id_empleado` AS `id_empleado`,concat(`frecuencia_horaria`.`hora_ingreso_lunes_semana_4`,' a ',`frecuencia_horaria`.`hora_egreso_lunes_semana_4`) AS `LUNES`,timediff(`frecuencia_horaria`.`hora_egreso_lunes_semana_4`,`frecuencia_horaria`.`hora_ingreso_lunes_semana_4`) AS `lunes_carga`,concat(`frecuencia_horaria`.`hora_ingreso_martes_semana_4`,' a ',`frecuencia_horaria`.`hora_egreso_martes_semana_4`) AS `MARTES`,timediff(`frecuencia_horaria`.`hora_egreso_martes_semana_4`,`frecuencia_horaria`.`hora_ingreso_martes_semana_4`) AS `martes_carga`,concat(`frecuencia_horaria`.`hora_ingreso_miercoles_semana_4`,' a ',`frecuencia_horaria`.`hora_egreso_miercoles_semana_4`) AS `MIERCOLES`,timediff(`frecuencia_horaria`.`hora_egreso_miercoles_semana_4`,`frecuencia_horaria`.`hora_ingreso_miercoles_semana_4`) AS `miercoles_carga`,concat(`frecuencia_horaria`.`hora_ingreso_jueves_semana_4`,' a ',`frecuencia_horaria`.`hora_egreso_jueves_semana_4`) AS `JUEVES`,timediff(`frecuencia_horaria`.`hora_egreso_jueves_semana_4`,`frecuencia_horaria`.`hora_ingreso_jueves_semana_4`) AS `jueves_carga`,concat(`frecuencia_horaria`.`hora_ingreso_viernes_semana_4`,' a ',`frecuencia_horaria`.`hora_egreso_viernes_semana_4`) AS `VIERNES`,timediff(`frecuencia_horaria`.`hora_egreso_viernes_semana_4`,`frecuencia_horaria`.`hora_ingreso_viernes_semana_4`) AS `viernes_carga`,concat(`frecuencia_horaria`.`hora_ingreso_sabado_semana_4`,' a ',`frecuencia_horaria`.`hora_egreso_sabado_semana_4`) AS `SABADO`,timediff(`frecuencia_horaria`.`hora_egreso_sabado_semana_4`,`frecuencia_horaria`.`hora_ingreso_sabado_semana_4`) AS `sabado_carga`,concat(`frecuencia_horaria`.`hora_ingreso_domingo_semana_4`,' a ',`frecuencia_horaria`.`hora_egreso_domingo_semana_4`) AS `DOMINGO`,timediff(`frecuencia_horaria`.`hora_egreso_domingo_semana_4`,`frecuencia_horaria`.`hora_ingreso_domingo_semana_4`) AS `domingo_carga` from ((`empleado` left join `frecuencia_horaria` on(`frecuencia_horaria`.`id_empleado` = `empleado`.`id_empleado`)) left join `cliente` on(`frecuencia_horaria`.`id_cliente` = `cliente`.`id_cliente`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mes_calendario_x_empleado_semana4`  AS  select `frecuencia_horaria`.`deleted_at` AS `deleted_at`,`frecuencia_horaria`.`asignado` AS `asignado`,`frecuencia_horaria`.`id_frecuencia_horaria` AS `id_frecuencia_horaria`,`cliente`.`nombre` AS `nombre`,`frecuencia_horaria`.`id_empleado` AS `id_empleado`,concat(`frecuencia_horaria`.`hora_ingreso_lunes_semana_4`,' a ',`frecuencia_horaria`.`hora_egreso_lunes_semana_4`) AS `LUNES`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_lunes_semana_4`,`frecuencia_horaria`.`hora_ingreso_lunes_semana_4`)) / (60 * 60) as decimal(10,1)) AS `lunes_carga`,concat(`frecuencia_horaria`.`hora_ingreso_martes_semana_4`,' a ',`frecuencia_horaria`.`hora_egreso_martes_semana_4`) AS `MARTES`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_martes_semana_4`,`frecuencia_horaria`.`hora_ingreso_martes_semana_4`)) / (60 * 60) as decimal(10,1)) AS `martes_carga`,concat(`frecuencia_horaria`.`hora_ingreso_miercoles_semana_4`,' a ',`frecuencia_horaria`.`hora_egreso_miercoles_semana_4`) AS `MIERCOLES`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_miercoles_semana_4`,`frecuencia_horaria`.`hora_ingreso_miercoles_semana_4`)) / (60 * 60) as decimal(10,1)) AS `miercoles_carga`,concat(`frecuencia_horaria`.`hora_ingreso_jueves_semana_4`,' a ',`frecuencia_horaria`.`hora_egreso_jueves_semana_4`) AS `JUEVES`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_jueves_semana_4`,`frecuencia_horaria`.`hora_ingreso_jueves_semana_4`)) / (60 * 60) as decimal(10,1)) AS `jueves_carga`,concat(`frecuencia_horaria`.`hora_ingreso_viernes_semana_4`,' a ',`frecuencia_horaria`.`hora_egreso_viernes_semana_4`) AS `VIERNES`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_viernes_semana_4`,`frecuencia_horaria`.`hora_ingreso_viernes_semana_4`)) / (60 * 60) as decimal(10,1)) AS `viernes_carga`,concat(`frecuencia_horaria`.`hora_ingreso_sabado_semana_4`,' a ',`frecuencia_horaria`.`hora_egreso_sabado_semana_4`) AS `SABADO`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_sabado_semana_4`,`frecuencia_horaria`.`hora_ingreso_sabado_semana_4`)) / (60 * 60) as decimal(10,1)) AS `sabado_carga`,concat(`frecuencia_horaria`.`hora_ingreso_domingo_semana_4`,' a ',`frecuencia_horaria`.`hora_egreso_domingo_semana_4`) AS `DOMINGO`,cast(time_to_sec(timediff(`frecuencia_horaria`.`hora_egreso_domingo_semana_4`,`frecuencia_horaria`.`hora_ingreso_domingo_semana_4`)) / (60 * 60) as decimal(10,1)) AS `domingo_carga` from ((`empleado` join `frecuencia_horaria` on(`frecuencia_horaria`.`id_empleado` = `empleado`.`id_empleado`)) join `cliente` on(`frecuencia_horaria`.`id_cliente` = `cliente`.`id_cliente`)) ;
 
 --
 -- Índices para tablas volcadas
@@ -597,7 +599,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `empleado`
@@ -615,7 +617,7 @@ ALTER TABLE `empresa`
 -- AUTO_INCREMENT de la tabla `frecuencia_horaria`
 --
 ALTER TABLE `frecuencia_horaria`
-  MODIFY `id_frecuencia_horaria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_frecuencia_horaria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `iva_categoria`
