@@ -241,15 +241,19 @@ servicioRoutes.put("/delete", verificarToken, async (req: any, res: Response) =>
 
 
 servicioRoutes.get("/getMesCalendario", verificarToken, async (req: any, res: Response) => {
+
+    
     try {
 
+        
         const body = req.body;
+        const id_empleado = body.id_empleado;
 
         let acumuladorSemana1=0;
         let acumuladorSemana2=0;
         let acumuladorSemana3=0;
         let acumuladorSemana4=0;
-        const id_empleado = body.id_empleado;
+    
         const resultSemana1:any = await query(   // 
             "SELECT * FROM `mes_calendario_x_empleado_semana1` where id_empleado=? and ISNULL(`deleted_at`) and `asignado`=1",[id_empleado]
         );
