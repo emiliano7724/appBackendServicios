@@ -8,6 +8,7 @@ export default class FileSystem{
     constructor(){}
 
     private crearCarpetaUsuario(userId:string){
+        
         const pathUser = path.resolve(__dirname, '../uploads', userId);
         const pathUserTemp = pathUser+"/temp";
         console.log("ruta pathUser", pathUser);
@@ -32,11 +33,11 @@ export default class FileSystem{
 
     }
 
-    guardarImagenTemporal(userId:string, file:IfileUpload):Promise<any>{
-
+    guardarImagenTemporal(id:string, file:IfileUpload):Promise<any>{
+//console.log("hi   ",id)
         return new Promise((resolve,reject)=>{
-            const path = this.crearCarpetaUsuario(userId);//donde la voy a guardar
-            console.log("path",path)
+            const path = this.crearCarpetaUsuario(id);//donde la voy a guardar
+//console.log("path",path)
             const nombreArchivo:string = this.generarNombreUnico(file.name); //con que nombre la voy a guardar
     
             file.mv(`${path}/${nombreArchivo}`, (error:any)=>{
