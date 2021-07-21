@@ -19,7 +19,7 @@ export default class email {
     //    return datosEmail //[{host: smtp.gmail.com, port: 587}]
     // }
 
-    enviarEmail(cuentaCorreoDestion:string, asunto:string, cuerpoEmail:string ="", html:string = ""){
+    enviarEmail(cuentaCorreoDestino:string, asunto:string, cuerpoEmail:string ="", html:string = ""){
 
         return new Promise((resolve,reject)=>{
             const transporter = nodemailer.createTransport({
@@ -37,7 +37,7 @@ export default class email {
     
             const mailOptions = {
                 from: this.auth.user,
-                to: cuentaCorreoDestion,
+                to: cuentaCorreoDestino,
                 subject: asunto,
                 text: cuerpoEmail,
                 html: html,
@@ -49,6 +49,7 @@ export default class email {
             }
     
             nodemailer.createTestAccount((error)=>{
+              console.log(mailOptions)
                 transporter.sendMail(mailOptions,(error, info)=>{
                     if(error){
                         reject("Soy el error "+ error)

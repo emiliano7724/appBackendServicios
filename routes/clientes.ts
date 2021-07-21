@@ -13,7 +13,7 @@ clientesRoutes.get("/index", verificarToken, async (req: any, res: Response) => 
     try {
 
         const result = await query(   // hacemos 3 controles para saber q no esta asignada
-            "SELECT * FROM `cliente` inner join localidad on localidad.id_localidad=cliente.id_localidad  inner join iva_categoria on iva_categoria.id_categoria_iva=cliente.id_categoria_iva inner join usuario on usuario.id_user=cliente.id_user  order by id_cliente desc"
+            "SELECT * FROM `cliente` inner join localidad on localidad.id_localidad=cliente.id_localidad  inner join iva_categoria on iva_categoria.id_categoria_iva=cliente.id_categoria_iva inner join usuario on usuario.id_user=cliente.id_user WHERE ISNULL(cliente.`deleted_at_cli`)  order by id_cliente desc"
         );
        // WHERE ISNULL(cliente.deleted_at)
         res.json({
@@ -57,15 +57,15 @@ clientesRoutes.post("/create", verificarToken, async (req: any, res: Response) =
         const nombre = body.nombre;
         const telefono = body.telefono;
         const cuit = body.cuit;
-        const email = body.email;
+        const email_cliente = body.email_cliente;
         const id_localidad = body.id_localidad;
         const id_categoria_iva = body.id_categoria_iva;
         const direccion = body.direccion;
         const id_user = body.id_user;
 
 
-        const result: any = await query("INSERT INTO `cliente` (`nombre`, `telefono`,`cuit`, `email`, `id_localidad`, `id_categoria_iva`, `direccion`, `id_user`)"
-            + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [nombre, telefono, cuit, email, id_localidad, id_categoria_iva, direccion, id_user]);
+        const result: any = await query("INSERT INTO `cliente` (`nombre`, `telefono`,`cuit`, `email_cliente`, `id_localidad`, `id_categoria_iva`, `direccion`, `id_user`)"
+            + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [nombre, telefono, cuit, email_cliente, id_localidad, id_categoria_iva, direccion, id_user]);
 
         res.json({
             estado: "succes",
@@ -88,7 +88,7 @@ clientesRoutes.put("/update", verificarToken, async (req: any, res: Response) =>
         const nombre = body.nombre;
         const telefono = body.telefono;
         const cuit = body.cuit;
-        const email = body.email;
+        const email_cliente = body.email_cliente;
         const id_categoria_iva = body.id_categoria_iva;
         const direccion = body.direccion;
         const id_user = body.id_user;
@@ -106,8 +106,8 @@ clientesRoutes.put("/update", verificarToken, async (req: any, res: Response) =>
       
         const result = await query("UPDATE `cliente` SET " +
             " `id_cliente` = ?, `nombre` = ?, `cuit` = ?, `telefono` = ?," +
-            " `email` = ?, `id_localidad` = ?, `id_categoria_iva` = ?,`direccion` = ?, `id_user` = ?, `updated_at` = ?, `deleted_at_cli` = ? " +
-            " WHERE `cliente`.`id_cliente` = ?", [id_cliente, nombre, cuit, telefono, email, id_localidad, id_categoria_iva, direccion, id_user, updated_at, deleted_at, id_cliente]
+            " `email_cliente` = ?, `id_localidad` = ?, `id_categoria_iva` = ?,`direccion` = ?, `id_user` = ?, `updated_at` = ?, `deleted_at_cli` = ? " +
+            " WHERE `cliente`.`id_cliente` = ?", [id_cliente, nombre, cuit, telefono, email_cliente, id_localidad, id_categoria_iva, direccion, id_user, updated_at, deleted_at, id_cliente]
         );
 
         res.json({

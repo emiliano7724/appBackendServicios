@@ -7,6 +7,7 @@ export const verificarToken = (req: any, res: Response, next: NextFunction) => {
 
     Token.checkToken(userToken).then(decoded => {
         req.usuario = decoded.usuario
+     
         const refreshToken = Token.getToken(
             req.usuario
         )

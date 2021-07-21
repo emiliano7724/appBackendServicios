@@ -7,11 +7,31 @@ import bcrypt from "bcryptjs";
 const userRoutes = Router();
 
 
+userRoutes.get("/getUser", verificarToken, async (req: any, res: Response) => {    
+    try {
+      
+        const usuario = req.usuario; // esto surge del decoded en verificar token 
+ 
+        const result:any = await query(
+            "SELECT * FROM `usuario` inner join rol on rol.id_rol=usuario.id_rol inner join empresa on empresa.id_empresa = usuario.id_empresa WHERE `id_user`="+usuario.id +" and ISNULL (deleted_at)"
+          
+        );
 
+        res.json({
+            estado: "succes",
+            mensaje: "Usuario retornado con exito",
+            data: result[0],
+
+        });
+    } catch (error) {
+        res.json({ estado: "error", data: error });
+    }
+});
 
 userRoutes.post("/login", async (req: any, res: Response) => {
     try {
         const body = req.body;
+        
         const name = body.name;
         const password = body.password;
         let passEnc: string = "";
@@ -24,12 +44,16 @@ userRoutes.post("/login", async (req: any, res: Response) => {
         });
         if (result.length > 0) {
             if (compararPassword(password, passEnc)) {
-                const tokenJwt = Token.getToken({
-                    id: result.id_user,
-                    name: result.name,
-                    email: result.email,
-                    id_rol: result.id_rol,
-                });
+            
+             const user={ 
+                id: result[0].id_user,
+                name: result[0].name,
+                email: result[0].email,
+                id_rol: result[0].id_rol}
+
+              const tokenJwt = Token.getToken(
+                   user
+                );
 
                 res.json({
                     estado: "succes",
@@ -38,14 +62,17 @@ userRoutes.post("/login", async (req: any, res: Response) => {
                     token: tokenJwt,
                 });
             } else {
+                
+              // console.log("contraseña incorrecta")
                 mensajeLoginFailed(res);
             }
         } else {
-            mensajeLoginFailed(res);
+          // console.log("no existe el usuario")
+            mensajeLoginFailed(res); 
         }
     } catch (error) {
         //const rollback = await query("rollback");
-        // res.json({ estado: "error", data: error, rollabck: rollback });
+        res.json({ estado: "error", data: error });
     }
 });
 
@@ -53,7 +80,7 @@ userRoutes.get("/index", verificarToken, async (req: any, res: Response) => {
     try {
       
         const result = await query(
-            "SELECT * FROM `usuario` WHERE ISNULL(`deleted_at`)"
+            "SELECT * FROM `usuario` inner join empresa on empresa.id_empresa=usuario.id_empresa inner join rol on rol.id_rol=usuario.id_rol WHERE ISNULL(`deleted_at`)"
         );
 
         res.json({
@@ -70,6 +97,7 @@ userRoutes.get("/index", verificarToken, async (req: any, res: Response) => {
 userRoutes.post("/create", verificarToken, async (req: any, res: Response) => {
     try {
         const body = req.body;
+
         const name = body.name;
         const email = body.email;
         const id_empresa = 2; //   A LA EMPRESA LA HARDCODEAMOS EN ESTA VERSION DEMO
@@ -97,11 +125,13 @@ userRoutes.put("/update", verificarToken, async (req: any, res: Response) => {
         const body = req.body;
         const name = body.name;
         const email = body.email;
-        const updated_at = new Date();
+     
         const id_user = body.id_user;
+
+        const telefono = body.telefono;
         const result = await query(
-            "UPDATE `usuario` SET `name` = ?, `email` = ?, `updated_at` = ? WHERE `usuario`.`id_user` = ?",
-            [name, email, updated_at, id_user]
+            "UPDATE `usuario` SET `name` = ?, `telefono` = ?, `email` = ? WHERE `usuario`.`id_user` = ?",
+            [name,telefono, email,  id_user]
         );
 
 
@@ -121,21 +151,25 @@ userRoutes.put("/updatePassword", verificarToken, async (req: any, res: Response
 
 
         const body = req.body;
-        const id_user = body.id_user;
+        const usuario = req.usuario // surge del decoded del token
+      
         const passwordActual = body.passwordActual;// aca viene plana
-        const passwordNueva = body.passwordNueva; // aca viene plana
+        const passwordNuevo = body.passwordNuevo; // aca viene plana
+
+
         let passEnc: string = "";
-        const updated_at = new Date();
-        const result: any = await query("SELECT * FROM `usuario` WHERE id_user=?", [id_user]);
+        
+        const result: any = await query("SELECT * FROM `usuario` WHERE id_user=?", [usuario.id]);
         Object.keys(result).forEach(function (key) {
             var row = result[key];
             passEnc = row.password;
         });
         if (compararPassword(passwordActual, passEnc)) { // si coincide la password pasada por la vista con la de la bd encriptamos la nueva password
-            const passwordNuevaEnc = bcrypt.hashSync(passwordNueva, 10); // encriptamos la nueva password 
+            console.log(passwordNuevo)
+            const passwordNuevaEnc = bcrypt.hashSync(passwordNuevo, 10); // encriptamos la nueva password 
             const result = await query(
-                "UPDATE `usuario` SET `password` = ? , `updated_at` = ? WHERE `usuario`.`id_user` = ?",
-                [passwordNuevaEnc, updated_at, id_user]
+                "UPDATE `usuario` SET `password` = ?  WHERE `usuario`.`id_user` = ?",
+                [passwordNuevaEnc, usuario.id]
             );
             res.json({
                 estado: "succes",
@@ -154,6 +188,7 @@ userRoutes.put("/updatePassword", verificarToken, async (req: any, res: Response
         }
       
     } catch (error) {
+       console.log(error)
         res.json({ estado: "error", data: error });
     }
 });
@@ -162,7 +197,7 @@ userRoutes.put("/updatePassword", verificarToken, async (req: any, res: Response
 
 function mensajeLoginFailed(res: Response) {
     res.json({
-        estado: "error",
+        estado: "invalidLogin",
         mensaje: "Usuario o contraseña incorrecta",
         data: "",
     });

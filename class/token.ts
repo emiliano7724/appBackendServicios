@@ -6,7 +6,8 @@ class Token {
 
     constructor() { }
 
-    static getToken(payload: {}): string {
+    static getToken(payload: any): string {
+      
         const token = jwt.sign(
             {
                 usuario: payload

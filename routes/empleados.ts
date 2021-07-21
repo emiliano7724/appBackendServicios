@@ -45,7 +45,7 @@ empleadoRoutes.post("/create", verificarToken, async (req: any, res: Response) =
         const telefono= body.telefono;
 
     
-        const result: any =await query("INSERT INTO `empleado` (`id_tipo_empleado`, `nombre`, `dni`, `cuit`, `email`, `foto`, `precio_hora`, `id_user`, `id_localidad`, `direccion`,`telefono`) "
+        const result: any =await query("INSERT INTO `empleado` (`id_tipo_empleado`, `nombre`, `dni`, `cuit`, `email_empleado`, `foto`, `precio_hora`, `id_user`, `id_localidad`, `direccion`,`telefono`) "
          +" VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",[id_tipo_empleado,nombre,dni,cuit,email,foto,precio_hora,id_user,id_localidad,direccion, telefono]);
 
         res.json({
@@ -56,7 +56,7 @@ empleadoRoutes.post("/create", verificarToken, async (req: any, res: Response) =
         });
 
     } catch (error) {
-
+        console.log(error)
         res.json({ estado: "error", data: error });
     }
 });
@@ -107,7 +107,7 @@ empleadoRoutes.put("/update", verificarToken, async (req: any, res: Response) =>
         }
         const result = await query("UPDATE `empleado` SET "+
         " `id_tipo_empleado` = ?, `nombre` = ?, `dni` = ?, `cuit` = ?, `telefono` = ?,"+
-        " `email` = ?, `foto` = ?, `precio_hora` = ?, `id_user` = ?, `updated_at` = ?, `deleted_at_emp` = ? , `id_localidad` = ?, `direccion` = ? "+
+        " `email_empleado` = ?, `foto` = ?, `precio_hora` = ?, `id_user` = ?, `updated_at` = ?, `deleted_at_emp` = ? , `id_localidad` = ?, `direccion` = ? "+
         " WHERE `empleado`.`id_empleado` = ?",[id_tipo_empleado,nombre,dni,cuit, telefono,email,foto,precio_hora,id_user,updated_at,deleted_at,id_localidad,direccion,id_empleado]
         );
 
@@ -118,7 +118,7 @@ empleadoRoutes.put("/update", verificarToken, async (req: any, res: Response) =>
 
         });
     } catch (error) {
-        
+        console.log(error)
         res.json({ estado: "error", data: error });
     }
 });

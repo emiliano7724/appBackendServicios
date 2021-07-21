@@ -9,6 +9,95 @@ const dashboardRoutes = Router();
 let empleados: IEmpleado[] = [];
 let empleado: IEmpleado;
 
+dashboardRoutes.get("/getClientesActivosSinServicios", verificarToken, async (req: any, res: Response) => {
+    try {
+
+        const result:any = await query(   // hacemos 3 controles para saber q no esta asignada
+            "SELECT * FROM cliente WHERE id_cliente NOT IN (SELECT id_cliente FROM horario_cliente) and  ISNULL(deleted_at_cli)"
+        );
+      res.json({
+            estado: "succes",
+            mensaje: "Clientes activos sin servicios retornados con exito",
+            data: result,
+
+        });
+    } catch (error) {
+        res.json({ estado: "error", data: error });
+    
+    }
+});
+dashboardRoutes.get("/getClientesActivos", verificarToken, async (req: any, res: Response) => {
+    try {
+
+        const result:any = await query(   // hacemos 3 controles para saber q no esta asignada
+            "SELECT * FROM `cliente` inner join localidad on localidad.id_localidad=cliente.id_localidad  inner join iva_categoria on iva_categoria.id_categoria_iva=cliente.id_categoria_iva inner join usuario on usuario.id_user=cliente.id_user WHERE ISNULL(cliente.`deleted_at_cli`)  order by id_cliente desc"
+        );
+       // WHERE ISNULL(cliente.deleted_at)
+        res.json({
+            estado: "succes",
+            mensaje: "Clientes retornados con exito",
+            data: result.length,
+
+        });
+    } catch (error) {
+        res.json({ estado: "error", data: error });
+    }
+});
+
+
+dashboardRoutes.get("/getTopEmpleadosCantidadDeServicios", verificarToken, async (req: any, res: Response) => {
+    try {
+
+        const cantidadEmpleadosAcondiderar=2; //
+        const result:any = await query(   // hacemos 3 controles para saber q no esta asignada
+            "SELECT * FROM `empleado` inner join tipo_empleado on tipo_empleado.id_tipo_empleado = empleado.id_tipo_empleado inner join usuario on usuario.id_user=empleado.id_user inner join localidad on localidad.id_localidad =empleado.id_localidad  WHERE ISNULL(empleado.`deleted_at_emp`)"
+        );
+      res.json({
+            estado: "succes",
+            mensaje: "Cantidad Empleados activos retornados con exito",
+            data: result.length,
+
+        });
+    } catch (error) {
+        res.json({ estado: "error", data: error });
+    }
+});
+
+dashboardRoutes.get("/getEmpleadosActivos", verificarToken, async (req: any, res: Response) => {
+    try {
+
+        const result:any = await query(   // hacemos 3 controles para saber q no esta asignada
+            "SELECT * FROM `empleado` inner join tipo_empleado on tipo_empleado.id_tipo_empleado = empleado.id_tipo_empleado inner join usuario on usuario.id_user=empleado.id_user inner join localidad on localidad.id_localidad =empleado.id_localidad  WHERE ISNULL(empleado.`deleted_at_emp`)"
+        );
+      res.json({
+            estado: "succes",
+            mensaje: "Cantidad Empleados activos retornados con exito",
+            data: result.length,
+
+        });
+    } catch (error) {
+        res.json({ estado: "error", data: error });
+    }
+});
+dashboardRoutes.get("/getEmpleadosActivosSinServicios", verificarToken, async (req: any, res: Response) => {
+    try {
+
+        const result:any = await query(   // hacemos 3 controles para saber q no esta asignada
+            "SELECT * FROM empleado WHERE id_empleado NOT IN (SELECT id_empleado FROM frecuencia_horaria)"
+        );
+      res.json({
+            estado: "succes",
+            mensaje: "Empleados activos sin servicios retornados con exito",
+            data: result,
+
+        });
+    } catch (error) {
+        res.json({ estado: "error", data: error });
+    }
+});
+
+
+
 dashboardRoutes.get("/getTopEmpleadosConMenosHorasDeServicios", verificarToken, async (req: any, res: Response) => {
     try {
 
