@@ -52,7 +52,7 @@ archivosRoutes.post('/getImg', verificarToken, (req:any, res:Response)=>{
      try {
     const foto = fileSystem.getFotoUrl(body.usuario, img);
    
-   res.sendFile(foto);
+   res.sendFile(foto); // ver como hacer en angular para captur la imagen
   /*  res.json({
     estado:"success",
     data: imagen
